@@ -1,0 +1,45 @@
+body {
+  font-family: Arial, sans-serif;
+}
+
+form {
+  margin-bottom: 20px;
+}
+
+label {
+  display: block;
+  margin-top: 10px;
+}
+
+button {
+  margin-top: 10px;
+}
+
+#result {
+  display: none;
+  margin-top: 20px;
+}
+
+#result h2 {
+  margin-top: 0;
+}
+
+.zone1 {
+  background-color: #888888; /* Gris */
+}
+
+.zone2 {
+  background-color: #007bff; /* Bleu */
+}
+
+.zone3 {
+  background-color: #28a745; /* Vert */
+}
+
+.zone4 {
+  background-color: #fd7e14; /* Orange */
+}
+
+.zone5 {
+  background-color: #dc3545; /* Rouge */
+}

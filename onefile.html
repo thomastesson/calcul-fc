@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Calculateur de fréquence cardiaque</title>
+  <link rel="stylesheet" type="text/css" href="style.css">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+    }
+    
+    form {
+      margin-bottom: 20px;
+    }
+    
+    label {
+      display: block;
+      margin-top: 10px;
+    }
+    
+    button {
+      margin-top: 10px;
+    }
+    
+    #result {
+      display: none;
+      margin-top: 20px;
+    }
+    
+    #result h2 {
+      margin-top: 0;
+    }
+    
+    .zone1 {
+      background-color: #888888; /* Gris */
+    }
+    
+    .zone2 {
+      background-color: #007bff; /* Bleu */
+    }
+    
+    .zone3 {
+      background-color: #28a745; /* Vert */
+    }
+    
+    .zone4 {
+      background-color: #fd7e14; /* Orange */
+    }
+    
+    .zone5 {
+      background-color: #dc3545; /* Rouge */
+    }
+    
+    @media screen and (max-width: 600px) {
+      /* Styles spécifiques aux écrans de largeur maximale de 600px */
+      
+      body {
+        font-size: 14px;
+      }
+      
+      form {
+        margin-bottom: 10px;
+      }
+      
+      label {
+        margin-top: 5px;
+      }
+      
+      input[type="number"],
+      select {
+        width: 100%;
+        margin-top: 5px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <h1>Calculateur de fréquence cardiaque</h1>
+  
+  <form id="heartRateForm">
+    <label for="gender">Genre:</label>
+    <select id="gender">
+      <option value="male">Homme</option>
+      <option value="female">Femme</option>
+    </select>
+    
+    <label for="age">Âge:</label>
+    <input type="number" id="age">
+    
+    <label for="maxHeartRate">Fréquence cardiaque maximale (bpm):</label>
+    <input type="number" id="maxHeartRate">
+    
+    <label for="restingHeartRate">Fréquence cardiaque de repos (bpm):</label>
+    <input type="number" id="restingHeartRate">
+  </form>
+  
+  <div id="result" style="display: none;">
+    <h2>Résultats :</h2>
+    <table>
+      <thead>
+        <tr>
+          <th></th>
+          <th class="zone1">Zone 1 (Récupération)</th>
+          <th class="zone2">Zone 2 (Endurance)</th>
+          <th class="zone3">Zone 3 (Résistance douce)</th>
+          <th class="zone4">Zone 4 (Résistance dure)</th>
+          <th class="zone5">Zone 5 (Puissance)</th>
+        </tr>
+      </thead>
+      <tbody id="resultTable">
+        <!-- Les résultats seront insérés ici -->
+      </tbody>
+    </table>
+  </div>
+  
+  <script>
+    function calculateMaxHeartRate() {
+      var ageInput = document.getElementById("age");
+      var genderInput = document.getElementById("gender");
+      var maxHeartRateInput = document.getElementById("maxHeartRate");
+      
+      var age = parseInt(ageInput.value);
+      var gender = genderInput.value;
+      
+      if (gender === "male") {
+        maxHeartRateInput.value = 220 - age;
+      } else {
+        maxHeartRateInput.value = 226 - age;
+      }
+      
+      calculateHeartRateZones();
+    }
+    
+    function calculateHeartRateZones() {
+      var maxHeartRateInput = document.getElementById("maxHeartRate");
+      var restingHeartRateInput = document.getElementById("restingHeartRate");
+      
+      var maxHeartRate = parseInt(maxHeartRateInput.value);
+      var restingHeartRate = parseInt(restingHeartRateInput.value);
+      
+      var resultTable = document.getElementById("resultTable");
+      resultTable.innerHTML = ""; // Réinitialiser le tableau
+      
+      var row = document.createElement("tr");
+      
+      var methodNameCell = document.createElement("td");
+      methodNameCell.textContent = "Fréquence cardiaque maximale de zone :";
+      row.appendChild(methodNameCell);
+      
+      if (restingHeartRate) {
+        var reserveHeartRate = maxHeartRate - restingHeartRate;
+        var zone1 = Math.round(0.5 * reserveHeartRate + restingHeartRate);
+        var zone2 = Math.round(0.6 * reserveHeartRate + restingHeartRate);
+        var zone3 = Math.round(0.7 * reserveHeartRate + restingHeartRate);
+        var zone4 = Math.round(0.8 * reserveHeartRate + restingHeartRate);
+        var zone5 = Math.round(0.9 * reserveHeartRate + restingHeartRate);
+      } else {
+        var zone1 = Math.round(0.6 * maxHeartRate);
+        var zone2 = Math.round(0.65 * maxHeartRate);
+        var zone3 = Math.round(0.75 * maxHeartRate);
+        var zone4 = Math.round(0.85 * maxHeartRate);
+        var zone5 = Math.round(0.95 * maxHeartRate);
+      }
+      
+      var zone1Cell = document.createElement("td");
+      zone1Cell.textContent = zone1;
+      row.appendChild(zone1Cell);
+      
+      var zone2Cell = document.createElement("td");
+      zone2Cell.textContent = zone2;
+      row.appendChild(zone2Cell);
+      
+      var zone3Cell = document.createElement("td");
+      zone3Cell.textContent = zone3;
+      row.appendChild(zone3Cell);
+      
+      var zone4Cell = document.createElement("td");
+      zone4Cell.textContent = zone4;
+      row.appendChild(zone4Cell);
+      
+      var zone5Cell = document.createElement("td");
+      zone5Cell.textContent = zone5;
+      row.appendChild(zone5Cell);
+      
+      resultTable.appendChild(row);
+      
+      document.getElementById("result").style.display = "block";
+    }
+    
+    document.getElementById("gender").addEventListener("change", calculateMaxHeartRate);
+    document.getElementById("age").addEventListener("input", calculateMaxHeartRate);
+    document.getElementById("maxHeartRate").addEventListener("input", calculateHeartRateZones);
+    document.getElementById("restingHeartRate").addEventListener("input", calculateHeartRateZones);
+  </script>
+</body>
+</html>
