@@ -1,9 +1,18 @@
 body {
   font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
 }
 
-form {
+h1 {
+  margin-top: 20px;
   margin-bottom: 20px;
+}
+
+#heartRateForm {
+  margin-bottom: 20px;
+  padding: 20px;
+  background-color: #f1f1f1;
 }
 
 label {
@@ -11,17 +20,47 @@ label {
   margin-top: 10px;
 }
 
+input[type="number"],
+select {
+  width: 100%;
+  padding: 5px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
 button {
   margin-top: 10px;
+  padding: 10px 20px;
+  font-size: 16px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
 }
 
 #result {
   display: none;
   margin-top: 20px;
+  padding: 20px;
+  background-color: #f1f1f1;
 }
 
 #result h2 {
   margin-top: 0;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th, td {
+  padding: 8px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
 }
 
 .zone1 {
@@ -42,4 +81,32 @@ button {
 
 .zone5 {
   background-color: #dc3545; /* Rouge */
+}
+
+@media screen and (max-width: 600px) {
+  h1 {
+    font-size: 24px;
+  }
+
+  #heartRateForm {
+    padding: 10px;
+  }
+
+  input[type="number"],
+  select {
+    font-size: 14px;
+  }
+
+  button {
+    padding: 8px 16px;
+    font-size: 14px;
+  }
+
+  #result {
+    padding: 10px;
+  }
+
+  th, td {
+    padding: 4px;
+  }
 }

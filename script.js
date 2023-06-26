@@ -22,15 +22,6 @@ function calculateHeartRateZones() {
   var maxHeartRate = parseInt(maxHeartRateInput.value);
   var restingHeartRate = parseInt(restingHeartRateInput.value);
   
-  var resultTable = document.getElementById("resultTable");
-  resultTable.innerHTML = ""; // Réinitialiser le tableau
-  
-  var row = document.createElement("tr");
-  
-  var methodNameCell = document.createElement("td");
-  methodNameCell.textContent = "Fréquence cardiaque maximale de zone :";
-  row.appendChild(methodNameCell);
-  
   if (restingHeartRate) {
     var reserveHeartRate = maxHeartRate - restingHeartRate;
     var zone1 = Math.round(0.5 * reserveHeartRate + restingHeartRate);
@@ -46,26 +37,72 @@ function calculateHeartRateZones() {
     var zone5 = Math.round(0.95 * maxHeartRate);
   }
   
+  var resultTable = document.getElementById("resultTable");
+  resultTable.innerHTML = ""; // Réinitialiser le tableau
+    
+  var row = document.createElement("tr");
+  row.className = "zone1";
+  var methodNameCell = document.createElement("th");
+  methodNameCell.textContent = "Zone 1 (Récupération)";
+  row.appendChild(methodNameCell);
   var zone1Cell = document.createElement("td");
   zone1Cell.textContent = zone1;
   row.appendChild(zone1Cell);
+  var zone1Cell = document.createElement("td");
+  zone1Cell.textContent = zone2 - 1;
+  row.appendChild(zone1Cell);
+  resultTable.appendChild(row);
   
-  var zone2Cell = document.createElement("td");
-  zone2Cell.textContent = zone2;
-  row.appendChild(zone2Cell);
+  var row = document.createElement("tr");
+  row.className = "zone2";
+  var methodNameCell = document.createElement("th");
+  methodNameCell.textContent = "Zone 2 (Endurance)";
+  row.appendChild(methodNameCell);
+  var zone1Cell = document.createElement("td");
+  zone1Cell.textContent = zone2;
+  row.appendChild(zone1Cell);
+  var zone1Cell = document.createElement("td");
+  zone1Cell.textContent = zone3 - 1;
+  row.appendChild(zone1Cell);
+  resultTable.appendChild(row);
   
-  var zone3Cell = document.createElement("td");
-  zone3Cell.textContent = zone3;
-  row.appendChild(zone3Cell);
+  var row = document.createElement("tr");
+  row.className = "zone3";
+  var methodNameCell = document.createElement("th");
+  methodNameCell.textContent = "Zone 3 (Résistance douce)";
+  row.appendChild(methodNameCell);
+  var zone1Cell = document.createElement("td");
+  zone1Cell.textContent = zone3;
+  row.appendChild(zone1Cell);
+  var zone1Cell = document.createElement("td");
+  zone1Cell.textContent = zone4 - 1;
+  row.appendChild(zone1Cell);
+  resultTable.appendChild(row);
   
-  var zone4Cell = document.createElement("td");
-  zone4Cell.textContent = zone4;
-  row.appendChild(zone4Cell);
+  var row = document.createElement("tr");
+  row.className = "zone4";
+  var methodNameCell = document.createElement("th");
+  methodNameCell.textContent = "Zone 4 (Résistance dure)";
+  row.appendChild(methodNameCell);
+  var zone1Cell = document.createElement("td");
+  zone1Cell.textContent = zone4;
+  row.appendChild(zone1Cell);
+  var zone1Cell = document.createElement("td");
+  zone1Cell.textContent = zone5 - 1;
+  row.appendChild(zone1Cell);
+  resultTable.appendChild(row);
   
-  var zone5Cell = document.createElement("td");
-  zone5Cell.textContent = zone5;
-  row.appendChild(zone5Cell);
-  
+  var row = document.createElement("tr");
+  row.className = "zone5";
+  var methodNameCell = document.createElement("th");
+  methodNameCell.textContent = "Zone 5 (Puissance)";
+  row.appendChild(methodNameCell);
+  var zone1Cell = document.createElement("td");
+  zone1Cell.textContent = zone5;
+  row.appendChild(zone1Cell);
+  var zone1Cell = document.createElement("td");
+  zone1Cell.textContent = maxHeartRate;
+  row.appendChild(zone1Cell);
   resultTable.appendChild(row);
   
   document.getElementById("result").style.display = "block";
