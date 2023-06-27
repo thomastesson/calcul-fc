@@ -7,8 +7,48 @@
   <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
-<h1>L'importance des zones de fréquence cardiaque en course à pied</h1>
-  <div id="content">
+<div id="content">
+<h1>Calculateur de fréquence cardiaque</h2>
+<p>Utilisez le calculateur ci-dessous pour estimer votre fréquence cardiaque maximale et déterminer vos zones de fréquence cardiaque pour la course à pied :</p>
+  <div id="heartRateForm">
+    <!-- <label for="gender">Sexe :</label> -->
+    <!-- <select id="gender"> -->
+      <!-- <option value="male">Homme</option> -->
+      <!-- <option value="female">Femme</option> -->
+    <!-- </select> -->
+	<div>
+		<input type="radio" id="male" name="gender" value="male" checked="checked">
+		<label for="male">Homme</label>
+		<input type="radio" id="female" name="gender" value="female">
+		<label for="female">Femme</label>
+	</div>
+    
+    <label for="age">Âge :</label>
+    <input type="number" id="age">
+    
+    <label for="maxHeartRate">Fréquence cardiaque maximale (bpm) :</label>
+    <input type="number" id="maxHeartRate">
+    
+    <label for="restingHeartRate">Fréquence cardiaque de repos (bpm) :</label>
+    <input type="number" id="restingHeartRate">
+  </div>
+  
+  <div id="result" style="display: none;">
+    <table>
+      <thead>
+        <tr>
+          <th>Zone</th>
+		  <th>FC début</th>
+		  <th>FC fin</th>
+        </tr>
+      </thead>
+      <tbody id="resultTable">
+        <!-- Les résultats seront insérés ici -->
+      </tbody>
+    </table>
+  </div>
+  <h2>L'importance des zones de fréquence cardiaque en course à pied</h1>
+  
     <p>La course à pied est un exercice physique efficace pour améliorer votre condition physique et votre santé globale. Pour maximiser les avantages de la course, il est essentiel de comprendre et d'utiliser les zones de fréquence cardiaque.</p>
   <h2>Qu'est-ce que la fréquence cardiaque?</h2>
 <p>La fréquence cardiaque est le nombre de battements de votre cœur par minute. Elle peut varier en fonction de votre niveau d'activité physique, de votre âge, de votre sexe et de votre condition physique générale.</p>
@@ -27,44 +67,7 @@
 
 <h2>Comment déterminer vos zones de fréquence cardiaque</h2>
 <p>Pour déterminer vos zones de fréquence cardiaque, il est recommandé de consulter un professionnel de la santé ou un entraîneur personnel. Ils peuvent effectuer un test d'effort ou utiliser des formules basées sur votre âge, votre sexe et votre niveau de condition physique.</p>
-
-<h2>Calculateur de fréquence cardiaque</h2>
-<p>Utilisez le calculateur ci-dessous pour estimer votre fréquence cardiaque maximale et déterminer vos zones de fréquence cardiaque pour la course à pied :</p>
-
-  
-  <div id="heartRateForm">
-    <label for="gender">Genre:</label>
-    <select id="gender">
-      <option value="male">Homme</option>
-      <option value="female">Femme</option>
-    </select>
-    
-    <label for="age">Âge:</label>
-    <input type="number" id="age">
-    
-    <label for="maxHeartRate">Fréquence cardiaque maximale (bpm):</label>
-    <input type="number" id="maxHeartRate">
-    
-    <label for="restingHeartRate">Fréquence cardiaque de repos (bpm):</label>
-    <input type="number" id="restingHeartRate">
-  </div>
-  
-  <div id="result" style="display: none;">
-    <h2>Résultats :</h2>
-    <table>
-      <thead>
-        <tr>
-          <th>Zone</th>
-		  <th>FC début</th>
-		  <th>FC fin</th>
-        </tr>
-      </thead>
-      <tbody id="resultTable">
-        <!-- Les résultats seront insérés ici -->
-      </tbody>
-    </table>
-  </div>
-  </div>
+</div>
   
   <script src="script.js"></script>
 </body>

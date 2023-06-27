@@ -1,18 +1,18 @@
 function calculateMaxHeartRate() {
   var ageInput = document.getElementById("age");
-  var genderInput = document.getElementById("gender");
+  var maleInput = document.getElementById("male");
   var maxHeartRateInput = document.getElementById("maxHeartRate");
   
   var age = parseInt(ageInput.value);
-  var gender = genderInput.value;
-  
-  if (gender === "male") {
-    maxHeartRateInput.value = 220 - age;
-  } else {
-    maxHeartRateInput.value = 226 - age;
+  if (age) {
+	  if (maleInput.checked) {
+		maxHeartRateInput.value = 220 - age;
+	  } else {
+		maxHeartRateInput.value = 226 - age;
+	  }
+
+	  calculateHeartRateZones();
   }
-  
-  calculateHeartRateZones();
 }
 
 function calculateHeartRateZones() {
@@ -108,7 +108,8 @@ function calculateHeartRateZones() {
   document.getElementById("result").style.display = "block";
 }
 
-document.getElementById("gender").addEventListener("change", calculateMaxHeartRate);
+document.getElementById("female").addEventListener("change", calculateMaxHeartRate);
+document.getElementById("male").addEventListener("change", calculateMaxHeartRate);
 document.getElementById("age").addEventListener("input", calculateMaxHeartRate);
 document.getElementById("maxHeartRate").addEventListener("input", calculateHeartRateZones);
 document.getElementById("restingHeartRate").addEventListener("input", calculateHeartRateZones);
