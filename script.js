@@ -37,7 +37,7 @@ function calculateHeartRateZones() {
     var zone4 = Math.round(0.85 * maxHeartRate);
     var zone5 = Math.round(0.95 * maxHeartRate);
   }
-  if (isNaN(zone1)) {
+  if (isNaN(zone1) || maxHeartRate < 9) {
 	document.getElementById("result").style.display = "none";
 	  
 	return;
