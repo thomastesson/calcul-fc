@@ -5,14 +5,15 @@ function calculateMaxHeartRate() {
   
   var age = parseInt(ageInput.value);
   if (age) {
-	  if (maleInput.checked) {
-		maxHeartRateInput.value = 220 - age;
-	  } else {
-		maxHeartRateInput.value = 226 - age;
-	  }
+    if (maleInput.checked) {
+      maxHeartRateInput.value = 220 - age;
+    } else {
+      maxHeartRateInput.value = 226 - age;
+    }
 
-	  calculateHeartRateZones();
+    calculateHeartRateZones();
   }
+  updateURLParameters();
 }
 
 function calculateHeartRateZones() {
@@ -35,6 +36,11 @@ function calculateHeartRateZones() {
     var zone3 = Math.round(0.75 * maxHeartRate);
     var zone4 = Math.round(0.85 * maxHeartRate);
     var zone5 = Math.round(0.95 * maxHeartRate);
+  }
+  if (isNaN(zone1)) {
+	document.getElementById("result").style.display = "none";
+	  
+	return;
   }
   
   var resultTable = document.getElementById("resultTable");
@@ -106,7 +112,72 @@ function calculateHeartRateZones() {
   resultTable.appendChild(row);
   
   document.getElementById("result").style.display = "block";
+  updateURLParameters();
 }
+
+function updateURLParameters() {
+  var ageInput = document.getElementById("age");
+  var maleInput = document.getElementById("male");
+  var maxHeartRateInput = document.getElementById("maxHeartRate");
+  var restingHeartRateInput = document.getElementById("restingHeartRate");
+  
+  var age = ageInput.value;
+  var gender = maleInput.checked ? "m" : "f";
+  var maxHeartRate = maxHeartRateInput.value;
+  var restingHeartRate = restingHeartRateInput.value;
+  
+  var urlParams = new URLSearchParams(window.location.search);
+  if (age > 0) {
+	urlParams.set("a", age);
+  } else {
+	urlParams.delete("a");
+  }
+  urlParams.set("s", gender);
+  if (maxHeartRate > 0) {
+  urlParams.set("m", maxHeartRate);
+  } else {
+	urlParams.delete("m");
+  }
+  if (restingHeartRate > 1) {
+	urlParams.set("r", restingHeartRate);
+  } else {
+	urlParams.delete("r");
+  }
+  
+  var newURL = window.location.origin + window.location.pathname + "?" + urlParams.toString();
+  
+  // Mettre à jour l'URL dans la barre d'adresse
+  window.history.replaceState({}, '', newURL);
+}
+
+function updateFields() {
+  var urlParams = new URLSearchParams(window.location.search);
+  
+  if (urlParams.has("a")) {
+    var ageInput = document.getElementById("age");
+    ageInput.value = urlParams.get("a");
+  }
+  
+  if (urlParams.has("s")) {
+    if (urlParams.get("s") === "m") {
+      document.getElementById("male").checked = true;
+    } else {
+      document.getElementById("female").checked = true;
+    }
+  }
+  
+  if (urlParams.has("m")) {
+    document.getElementById("maxHeartRate").value = urlParams.get("m");
+  }
+
+  if (urlParams.has("r")) {
+    document.getElementById("restingHeartRate").value = urlParams.get("r");
+  }
+  calculateHeartRateZones();
+}
+
+window.onload = updateFields;
+
 
 document.getElementById("female").addEventListener("change", calculateMaxHeartRate);
 document.getElementById("male").addEventListener("change", calculateMaxHeartRate);
